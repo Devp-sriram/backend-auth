@@ -1,0 +1,5 @@
+username = "devp-team"
+password ="Sriram@1212"
+
+
+consction string = mongodb+srv://devp-team:Sriram@1212@cluster0.nn9stqv.mongodb.net/
