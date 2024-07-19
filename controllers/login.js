@@ -3,6 +3,7 @@ var jwt = require( "jsonwebtoken" );
 const bcrypt =require('bcrypt')
 const client = require('../redis')
 const dotenv = require('dotenv')
+const { json } = require("express");
 dotenv.config()
 // const verifyUser =require("../models/verifyUser")
 
@@ -22,6 +23,7 @@ async function CheckUser(email) {
 async function authenticateUser(email,password){
     try{
         const userCheck = await User.findOne({email:email})
+        console.log(userCheck)
         const validPassword = await bcrypt.compare( password , userCheck.password)
         console.log(validPassword)
         if(validPassword){

@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 function sendMail(toEmail,subject,content){
     console.log("email");
     const mailOptions={
-        form:"authenticationlinkforyou@gmail.com",
+        form:"sriramraman100@gmail.com",
         to: toEmail,
         subject:subject,
         html:content,
