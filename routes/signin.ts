@@ -23,17 +23,18 @@ router.get("/:token", async ( req , res) => {
 
 router.post("/verify", async (req, res) => {
     try {
-        const { name, email, password } = await req.body;
-        console.log(name, email, password);
-        const registerCredentials = await CheckUser(email);
-        if (registerCredentials === false) {
+      const { name, email, password } = await req.body;
+      console.log(name, email, password);
+      const registerCredentials = await CheckUser(email);
+        if(registerCredentials === false) {
             await InsertVerifyUser(name, email, password)
             res.status(200).send(true)
-        } else if (registerCredentials === true) {
+        }else if(registerCredentials === true) {
             res.status(200).send(false)
-        } else if (registerCredentials === "Server Busy"){
+        }else if(registerCredentials === "Server Busy"){
             res.status(503).send('Service Unavailable')
-        }} catch (error) {
+        }
+    }catch(error) {
         console.log(error);
         res.send(500).send("error in"+ error)
     }

@@ -21,8 +21,9 @@ export async function CheckUser(email : string) {
         console.log(user);
         if (user) {
             return true;
+        }else{
+            return false;
         }
-        return false;
     } catch(error){
         return error.message
     }
