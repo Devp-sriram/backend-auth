@@ -1,13 +1,21 @@
-const User = require("../models/User")
-var jwt = require( "jsonwebtoken" );
-const bcrypt =require('bcrypt')
-const client = require('../redis')
-const dotenv = require('dotenv')
-const { json } = require("express");
+import  User from "../models/User.ts"
+import jwt  from "jsonwebtoken"
+import bcrypt from 'bcrypt'
+import client from '../redis.ts'
+import dotenv from 'dotenv'
 dotenv.config()
 // const verifyUser =require("../models/verifyUser")
+//
 
-async function CheckUser(email) {
+export interface Response{
+    id:Object | string,
+    name:string | null | undefined,
+    email:string,
+    token:string,
+    status:boolean,
+}
+
+export async function CheckUser(email : string) {
     try {
         const user = await User.findOne({ email : email });
         console.log(user);
@@ -16,25 +24,25 @@ async function CheckUser(email) {
         }
         return false;
     } catch(error){
-        return "Server Busy", error.message
+        return error.message
     }
 }
 
-async function authenticateUser(email,password){
+export async function authenticateUser(email : string,password :string){
     try{
         const userCheck = await User.findOne({email:email})
-        console.log(userCheck)
-        const validPassword = await bcrypt.compare( password , userCheck.password)
-        console.log(validPassword)
-        if(validPassword){
-            const token =await jwt.sign({email},process.env.login_secret_token)
-            const response = {
+        if(userCheck){
+          const validPassword = await bcrypt.compare( password , userCheck.password)  
+          if(validPassword){
+          const token =await jwt.sign({email},process.env.login_secret_token)
+            const response : Response = {
                 id:userCheck._id,
                 name:userCheck.name,
                 email:userCheck.email,
                 token:token,
                 status:true,
             }
+          
         await client.set(`key-${email}`, JSON.stringify(response)) 
            
         await User.findOneAndUpdate(
@@ -43,8 +51,9 @@ async function authenticateUser(email,password){
             {new:true}
         );
         return response;
+          }else{return 'invalid password'}
         }else{ 
-            return 'invalid username or password'
+            return 'invalid username'
         }
        
     }catch(error){
@@ -53,7 +62,7 @@ async function authenticateUser(email,password){
     }
 }
 
-async function autharizeUser(token){
+export async function autharizeUser(token : string){
     try{
         const decodedToken =await jwt.verify( token , process.env.login_secret_token)
         if(decodedToken){
@@ -72,6 +81,4 @@ async function autharizeUser(token){
         console.log(e);
     }
 };
-
     
-module.exports = {CheckUser, authenticateUser,autharizeUser}

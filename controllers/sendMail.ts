@@ -1,15 +1,15 @@
-const nodemailer = require("nodemailer");
-const dotenv =require("dotenv")
+import nodemailer from "nodemailer"
+import dotenv from "dotenv"
 dotenv.config();
 const transporter = nodemailer.createTransport({
   service:"gmail",
   auth: {
-    user: process.env.nodemailer_user,
-    pass: process.env.nodemailer_pass,
+    user: process.env.NODE_MAILER_USER,
+    pass: process.env.NODE_MAILER_PASS,
   },
 });
 
-function sendMail(toEmail,subject,content){
+export default  function sendMail(toEmail,subject,content){
     console.log("email");
     const mailOptions={
         form:"sriramraman100@gmail.com",
@@ -18,7 +18,7 @@ function sendMail(toEmail,subject,content){
         html:content,
     };
 
-    transporter.sendMail(mailOptions,(error,info)=>{
+     transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
             console.log(`error occured`,error)
         }else{
@@ -26,4 +26,3 @@ function sendMail(toEmail,subject,content){
         }
     });
 }
-module.exports={sendMail};

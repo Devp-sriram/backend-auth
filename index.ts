@@ -1,9 +1,9 @@
-const express =require('express')
-const connectDb = require("./db");
-var signinRouter =require("./routes/signin")
-var loginRouter =require("./routes/login")  
-var homeRouter =require("./routes/home")
-const cors = require("cors");
+import express from 'express'
+import connectDb from './db.ts'
+import signinRouter from "./routes/signin.ts"
+import loginRouter from "./routes/login.ts"  
+import homeRouter from "./routes/home.ts"
+import cors from  "cors"
 
 const app = express();
 const port = 4000;
@@ -12,7 +12,7 @@ app.use(cors({origin:"*"}));
 
 
 
-connectDb();
+await connectDb();
 
 
 app.get("/" ,(req,res)=>{

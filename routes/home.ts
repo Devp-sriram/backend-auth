@@ -1,10 +1,10 @@
-const express = require('express');
-const {autharizeUser} =require('../controllers/login')
+import express from 'express'
+import { autharizeUser } from '../controllers/login.ts'
 const router =express.Router()
 
 
 
-router.get('/',async(req,res)=>{
+export default router.get('/',async(req,res)=>{
    try{ const auth_token = req.headers.authorization
     const loginCredentials = await autharizeUser(auth_token)
     if(loginCredentials === false){
@@ -17,5 +17,3 @@ router.get('/',async(req,res)=>{
         console.log(error)
     }
 });
-
-module.exports = router;

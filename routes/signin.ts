@@ -1,7 +1,7 @@
-const express = require("express");
-const { CheckUser } = require("../controllers/login")
-const { InsertVerifyUser, InsertSignupUser } = require("../controllers/signin")
-var router = express.Router();
+import express from "express"
+import { CheckUser } from "../controllers/login.ts"
+import { InsertVerifyUser, InsertSignupUser } from "../controllers/signin.ts"
+const router = express.Router();
 
 router.get("/:token", async ( req , res) => {
     try{
@@ -40,4 +40,4 @@ router.post("/verify", async (req, res) => {
 });
 
 
-module.exports = router ;
+export default router ;

@@ -1,13 +1,13 @@
-const User = require ('../models/User')
-const verifyUser =require("../models/verifyUser")
-const { sendMail } = require("./SendMail");
-const bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+import User from '../models/User.ts'
+import verifyUser from "../models/verifyUser.ts"
+import  sendMail  from "./sendMail.ts"
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import dotenv from "dotenv"
 dotenv.config();
 
 
-async function InsertVerifyUser(name, email, password){
+export async function InsertVerifyUser(name : string, email : string, password : string){
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
@@ -37,12 +37,12 @@ async function InsertVerifyUser(name, email, password){
     console.log(error);
   }  
 }
-async function generateToken(email) {
+export async function generateToken(email) {
       const token = jwt.sign(email, process.env.signup_Secret_Token);
       return token;
 }
 
-async function InsertSignupUser(token){
+export async function InsertSignupUser(token){
   try {const userVerify =await verifyUser.findOne({token:token})
   if(userVerify){
     const newUser = new User({
@@ -88,6 +88,5 @@ async function InsertSignupUser(token){
   }; 
 }
 
-module.exports = {InsertVerifyUser,InsertSignupUser};
 
 
