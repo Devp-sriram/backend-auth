@@ -37,7 +37,7 @@ export async function InsertVerifyUser(name : string, email : string, password :
     console.log(error);
   }  
 }
-export async function generateToken(email) {
+export async function generateToken(email : string) {
       const token = jwt.sign(email, process.env.signup_Secret_Token);
       return token;
 }

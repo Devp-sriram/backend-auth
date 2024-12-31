@@ -29,7 +29,7 @@ export async function CheckUser(email : string) {
     }
 }
 
-export async function authenticateUser(email : string,password :string){
+export async function authenticateUser(email : string, password :string){
     try{
         const userCheck = await User.findOne({email:email})
         if(userCheck){
