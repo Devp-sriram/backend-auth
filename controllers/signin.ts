@@ -21,7 +21,7 @@ export async function InsertVerifyUser(name : string, email : string, password :
       token: token,
     });
 
-    const activationLink = `http://localhost:4000/signin/${token}`;
+    const activationLink = `${process.env.BACKEND_URL}/signin/${token}`;
     const content = `<h4>hi,there</h4>
     <h5>welcome to app</h5>
     <P>thankyou for signinup click the below link to activate</p>
