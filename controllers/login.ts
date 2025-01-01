@@ -7,7 +7,7 @@ dotenv.config()
 // const verifyUser =require("../models/verifyUser")
 //
 
-export interface Response{
+export interface Response {
     id:Object | string,
     name:string | null | undefined,
     email:string,

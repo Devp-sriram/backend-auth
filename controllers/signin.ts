@@ -21,7 +21,7 @@ export async function InsertVerifyUser(name : string, email : string, password :
       token: token,
     });
 
-    const activationLink = `http://localhost:4000/${token}`;
+    const activationLink = `http://localhost:4000/signin/${token}`;
     const content = `<h4>hi,there</h4>
     <h5>welcome to app</h5>
     <P>thankyou for signinup click the below link to activate</p>
@@ -42,8 +42,9 @@ export async function generateToken(email : string) {
       return token;
 }
 
-export async function InsertSignupUser(token){
-  try {const userVerify =await verifyUser.findOne({token:token})
+export async function InsertSignupUser(token : string){
+  try {
+  const userVerify = await verifyUser.findOne({token:token})
   if(userVerify){
     const newUser = new User({
       name:userVerify.name,
@@ -60,7 +61,7 @@ export async function InsertSignupUser(token){
     <p>regrads</p>
     <P>Team</p>`;
 
-    sendMail( newUser, "registration succesful" ,content);
+    sendMail( newUser.email, "registration succesful" ,content);
     
     return `<h4>registration sucess</h4>
     <h5>welcome to app</h5>
