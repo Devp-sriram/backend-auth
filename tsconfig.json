@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "noCheck":true,
+    "strict": false,
+    "esModuleInterop": true, 
+    "allowJs": true,
+    "checkJs": false
+  }
+}
+

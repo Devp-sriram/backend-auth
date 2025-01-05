@@ -12,7 +12,7 @@ app.use(cors({origin:"*"}));
 
 
 
-await connectDb();
+await connectDb()
 
 
 app.get("/" ,(req,res)=>{
