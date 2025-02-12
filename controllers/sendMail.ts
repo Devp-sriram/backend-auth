@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export default  function sendMail(toEmail : string,subject:string ,content: string){
-    console.log("email");
+
     const mailOptions={
         form:"sriramraman100@gmail.com",
         to: toEmail,
@@ -20,9 +20,9 @@ export default  function sendMail(toEmail : string,subject:string ,content: stri
 
      transporter.sendMail(mailOptions,(error,info)=>{
         if(error){
-            console.log(`error occured`,error)
+            return error
         }else{
-            console.log(`Email sent`,info.response);
+            return `Email sent${info.response}`;
         }
     });
 }

@@ -5,7 +5,8 @@ const router =express.Router()
 
 
 export default router.get('/',async(req,res)=>{
-   try{ const auth_token = req.headers.authorization
+   try{ 
+    const auth_token = req.headers.authorization
     const loginCredentials = await autharizeUser(auth_token)
     if(loginCredentials === false){
         res.status(400).send('invalid token')

@@ -27,8 +27,8 @@ router.post("/verify", async (req, res) => {
       console.log(name, email, password);
       const registerCredentials = await CheckUser(email);
         if(registerCredentials === false) {
-            await InsertVerifyUser(name, email, password)
-            res.status(200).send(true)
+            const status = await InsertVerifyUser(name, email, password)
+            res.status(200).send(status)
         }else if(registerCredentials === true) {
             res.status(200).send(false)
         }else if(registerCredentials === "Server Busy"){

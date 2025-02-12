@@ -24,7 +24,7 @@ export default router.post('/',async (req,res)=>{
    try{const {email,password} = await req.body;
     const loginCredential : Response | string = await authenticateUser(email , password)
     if(loginCredential){
-         res.status(200).json(loginCredential)
+         res.status(200).send(`succesfully signined as ${loginCredential.name}`)
     }else if(loginCredential === 'error occur while auth - user'){
         res.status(404).send("error occur while auth - user")
     }
