@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 export default  function sendMail(toEmail : string,subject:string ,content: string){
 
     const mailOptions={
-        form:"sriramraman100@gmail.com",
+        from:"sriramraman100@gmail.com",
         to: toEmail,
         subject:subject,
         html:content,
